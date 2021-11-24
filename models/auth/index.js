@@ -26,7 +26,20 @@ function loginAuthUser({ email,password }){
     }) 
 }
 
+function checkEmailExistance(email){
+    const sql = 'select * from auth where email=?'
+    return new Promise((resolve, reject)=>{
+        db.query(sql,[email],(err,res)=>{
+            if(err)console.log(err)
+            else{
+                resolve(res)
+            }
+        })
+    }) 
+}
+
 module.exports={
     registerAuthUser,
-    loginAuthUser
+    loginAuthUser,
+    checkEmailExistance
 }
